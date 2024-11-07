@@ -104,7 +104,7 @@
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone https://github.com/YOUR-USERNAME/halls.git
+   git clone https://github.com/GoEntry/halls.git
    cd halls
    ```
 
