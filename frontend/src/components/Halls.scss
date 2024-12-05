@@ -1,0 +1,579 @@
+@use "./utils.scss" as *;
+@use "./global.scss" as *;
+@use "/src/fonts/fonts.css" as *;
+
+
+.halls {
+  &.dashboardContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: rgb(255 255 255);
+    background-image: linear-gradient(118deg, #87e0cb 7.92%, #c6e088 90.54%);
+    background-size: auto;
+    height: 100%;
+    overflow: hidden;
+
+    @include mq-between(lg, xl) {
+      position: relative;
+      display: flex !important;
+    }
+  }
+
+  .mainLayout {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    align-content: flex-start;
+    gap: 16px;
+    margin: 110px 25px;
+
+    @include mq-between(lg, xxl) {
+      justify-content: center;
+    }
+  }
+
+  .leftColumn {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    flex: 0 0 auto;
+    width: 306px;
+    min-width: 0;
+
+    @include md {
+      position: relative;
+      width: 100%;
+      min-width: unset;
+    }
+  }
+
+  .nextTrainingCard {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255 255 255 / 63.1%);
+    border-radius: 29px;
+    transition: transform 0.7s ease, box-shadow 0.7s ease;
+  }
+
+  .nextTrainingCard:hover {
+    transform: translateY(-15px); /* Приподнимаем блок на 10 пикселей */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Добавляем тень для эффекта */
+}
+
+  .trainingInfo {
+    display: flex;
+    flex-direction: column;
+    row-gap: 29px;
+    margin: 18px 28px 17px 25px;
+
+    @include xs {
+      position: relative;
+      margin: 18px 16px 17px;
+    }
+
+    @include tn {
+      margin: 18px auto 17px;
+    }
+  }
+
+  .trainingTitle {
+    font: italic 700 25px/1.2 "Sonic Italic", Helvetica, Arial, serif;
+    color: rgb(0 0 0);
+
+    @include md {
+      align-items: flex-start;
+      font-size: 24px;
+    }
+
+    @include xxs {
+      font-size: 20px;
+    }
+  }
+
+  .dateTimeWrapper {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 10px;
+
+    @include tn {
+      column-gap: 8px;
+    }
+  }
+
+  .dateContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+    margin: 3px 0 8.81px;
+    width: 120px;
+    min-width: 0;
+    height: 152.1875px;
+  }
+
+  .dayDisplay {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 99.1875px;
+    font: 600 80px/1.2 Brotesk, Helvetica, Arial, serif;
+    color: rgb(0 0 0);
+    text-align: center;
+
+    @include md {
+      align-items: flex-start;
+      font-size: 52px;
+    }
+
+    @include xxs {
+      font-size: 36px;
+    }
+  }
+
+  .dayDisplay_span0 {
+    font: 600 1em/1.2 "Brotesk (Trial)", Helvetica, Arial, serif;
+  }
+
+  .monthWrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .monthDisplay {
+    position: absolute;
+    top: -37px;
+    bottom: -50px;
+    left: 50%;
+    display: flex;
+    justify-content: center;
+    width: 120px;
+    height: 87px;
+    font: 600 80px/1.2 Brotesk, Helvetica, Arial, serif;
+    color: rgb(0 0 0);
+    text-align: center;
+    transform: translate(-50%, 0);
+
+    @include md {
+      align-items: flex-start;
+      font-size: 52px;
+    }
+
+    @include xxs {
+      font-size: 36px;
+    }
+  }
+
+  .monthDisplay_span0 {
+    font: 600 0.375em/1.2 "Brotesk (Trial)", Helvetica, Arial, serif;
+    margin-top: 40px;
+
+  }
+
+  .timeDisplay {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 91px;
+    min-width: 0;
+  }
+
+  .timeText {
+    position: absolute;
+    top: -11px;
+    bottom: 0;
+    left: 50%;
+    display: flex;
+    justify-content: center;
+    width: 91px;
+    height: 175px;
+    font: 600 80px/1.2 Brotesk, Helvetica, Arial, serif;
+    color: rgb(0 0 0);
+    text-align: center;
+    transform: translate(-50%, 0);
+
+    @include md {
+      align-items: flex-start;
+      font-size: 52px;
+    }
+
+    @include xs {
+      left: 55%;
+    }
+
+    @include xxs {
+      font-size: 36px;
+    }
+  }
+
+  .dividerLine {
+    position: relative;
+    margin: 83px 1px 85px 3px;
+    width: 95.6%;
+    height: 4px;
+    object-fit: cover;
+
+    @include xs {
+      margin: 75.1px 1px 80px 3px;
+    }
+
+    @include tn {
+      margin: 50px 1px 50px 3px;
+    }
+  }
+
+  .weightGoalCard {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255 255 255 / 63.1%);
+    border-radius: 29px;
+    transition: transform 0.7s ease, box-shadow 0.7s ease;
+  }
+
+  .weightGoalCard:hover {
+    transform: translateY(-15px); /* Приподнимаем блок на 10 пикселей */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Добавляем тень для эффекта */
+  }
+
+  .goalContent {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+    margin: 12px 0 11px 26px;
+    width: 194px;
+    max-width: 85%;
+
+    @include md {
+      position: relative;
+      margin: 12px auto 11px;
+    }
+  }
+
+  .goalTitle {
+    margin: 0 39px 0 0;
+    font: italic 700 25px/1.2 "Sonic Italic", Helvetica, Arial, serif;
+    color: rgb(0 0 0);
+
+    @include md {
+      position: relative;
+      align-items: flex-start;
+      margin: 0 32px 0 0;
+      font-size: 24px;
+    }
+
+    @include xs {
+      margin: 0 16px 0 0;
+    }
+
+    @include xxs {
+      font-size: 20px;
+    }
+
+    @include tn {
+      margin: 0 8px 0 0;
+    }
+  }
+
+  .weightTarget {
+    display: flex;
+    justify-content: flex-end;
+    font: 600 60px/1.2 Brotesk, Helvetica, Arial, serif;
+    color: rgb(0 0 0);
+    text-align: right;
+
+    @include md {
+      align-items: flex-start;
+      font-size: 52px;
+    }
+
+    @include xxs {
+      font-size: 36px;
+    }
+  }
+
+  .lastTrainingCard {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    width: 306px;
+    min-width: 0;
+    background-color: rgb(255 255 255 / 63.1%);
+    border-radius: 29px;
+    transition: transform 0.7s ease, box-shadow 0.7s ease;
+
+    @include md {
+      position: relative;
+      width: 100%;
+      min-width: unset;
+    }
+  }
+
+  .lastTrainingCard:hover {
+    transform: translateY(-10px); /* Приподнимаем блок на 10 пикселей */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Добавляем тень для эффекта */
+}
+
+  .trainingStats {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0;
+    margin: 20px 8px 43px 7px;
+  }
+
+  .statsContent {
+    display: flex;
+    flex-direction: column;
+    row-gap: 14px;
+    margin: 0 0 0 2px;
+    width: 230px;
+    max-width: 85%;
+  }
+
+  .statsTitle {
+    margin: 0 0 0 6px;
+    font: italic 700 25px/1.2 "Sonic Italic", Helvetica, Arial, serif;
+    color: rgb(0 0 0);
+
+    @include md {
+      align-items: flex-start;
+      font-size: 24px;
+    }
+
+    @include xxs {
+      font-size: 20px;
+    }
+  }
+
+  .metricsContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0;
+    width: 125px;
+    max-width: 85%;
+  }
+
+  .distanceMetric {
+    font: 600 22px/1.2 Brotesk, Helvetica, Arial, serif;
+    color: rgb(0 0 0);
+
+    @include md {
+      align-items: flex-start;
+      font-size: 20px;
+    }
+
+    @include xxs {
+      font-size: 18px;
+    }
+  }
+
+  .caloriesMetric {
+    display: flex;
+    justify-content: flex-end;
+    font: 600 22px/1.2 Brotesk, Helvetica, Arial, serif;
+    color: rgb(0 0 0);
+    text-align: right;
+
+    @include md {
+      align-items: flex-start;
+      font-size: 20px;
+    }
+
+    @include xxs {
+      font-size: 18px;
+    }
+  }
+
+  .pulseMetric {
+    display: flex;
+    justify-content: flex-end;
+    font: 600 22px/1.2 Brotesk, Helvetica, Arial, serif;
+    color: rgb(0 0 0);
+    text-align: right;
+
+    @include md {
+      align-items: flex-start;
+      font-size: 20px;
+    }
+
+    @include xxs {
+      font-size: 18px;
+    }
+  }
+
+  .colorIndicator {
+    z-index: 1;
+    min-height: 6px;
+    background-color: rgb(94 94 94);
+    border-radius: 3px;
+    opacity: 0.5;
+  }
+
+  .statsGraph {
+    margin: 31px 1px 0 2px;
+    width: 98.97%;
+    border-radius: 20px;
+    object-fit: cover;
+
+    @include sm {
+      position: relative;
+      margin: 31px auto 0;
+    }
+  }
+
+  .rightColumn {
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+    flex: 0 0 auto;
+    width: 306px;
+    min-width: 0;
+
+    @include md {
+      position: relative;
+      width: 100%;
+      min-width: unset;
+    }
+  }
+
+  .addTrainingCard {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255 255 255 / 63.1%);
+    border-radius: 29px;
+    transition: transform 0.7s ease, box-shadow 0.7s ease;
+  }
+
+  .addTrainingCard:hover {
+    transform: translateY(-15px); /* Приподнимаем блок на 10 пикселей */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Добавляем тень для эффекта */
+  }
+
+  .addTrainingContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 25px;
+    margin: 12px 22px 27px 20px;
+
+    @include xs {
+      position: relative;
+      margin: 12px 16px 27px;
+    }
+
+    @include tn {
+      margin: 12px auto 27px;
+    }
+  }
+
+  .addTrainingText {
+    width: 100%;
+    font: italic 700 37px/1.2 "Sonic Italic", Helvetica, Arial, serif;
+    color: rgb(0 0 0);
+
+    @include md {
+      align-items: flex-start;
+      font-size: 34px;
+    }
+
+    @include xxs {
+      font-size: 30px;
+    }
+  }
+
+  .addTrainingIcon {
+    width: 107px;
+    max-width: 85%;
+    object-fit: cover;
+  }
+
+  .trainingLogCard {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255 255 255 / 63.1%);
+    border-radius: 29px;
+    transition: transform 0.7s ease, box-shadow 0.7s ease;
+  }
+
+  .trainingLogCard:hover {
+    transform: translateY(-15px); /* Приподнимаем блок на 10 пикселей */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Добавляем тень для эффекта */
+  }
+
+  .logTitle {
+    margin: 71px 18px 68px 20px;
+    font: italic 700 37px/1.2 "Sonic Italic", Helvetica, Arial, serif;
+    color: rgb(0 0 0);
+
+    @include md {
+      align-items: flex-start;
+      font-size: 34px;
+    }
+
+    @include xs {
+      position: relative;
+      margin: 71px 16px 68px;
+    }
+
+    @include xxs {
+      font-size: 30px;
+    }
+
+    @include tn {
+      margin: 50px 8px;
+    }
+  }
+
+  .wrapper2 {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    width: 108px;
+    min-width: 0;
+    background-color: rgb(255 255 255 / 63.1%);
+    border-radius: 29px;
+  }
+
+  .flex_col {
+    display: flex;
+    flex-direction: column;
+    margin: 55px 10px 59px 16px;
+  }
+
+  .image15 {
+    margin: 0 0 0 7px;
+    width: 75px;
+    border-radius: 10px;
+    transition: transform 0.7s ease, box-shadow 0.7s ease;
+  }
+
+  .image15:hover {
+    transform: translateY(-15px); /* Приподнимаем блок на 10 пикселей */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Добавляем тень для эффекта */
+  }
+
+  .image7 {
+    margin: 100px 10px 0 9px;
+    width: 63px;
+    border-radius: 10px;
+    transition: transform 0.7s ease, box-shadow 0.7s ease;
+  }
+
+  .image7:hover {
+    transform: translateY(-15px); /* Приподнимаем блок на 10 пикселей */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Добавляем тень для эффекта */
+  }
+
+  .image9 {
+    margin: 90px 7px 0 0;
+    width: 75px;
+    border-radius: 10px;
+    transition: transform 0.7s ease, box-shadow 0.7s ease;
+  }
+
+  .image9:hover {
+    transform: translateY(-15px); /* Приподнимаем блок на 10 пикселей */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Добавляем тень для эффекта */
+  }
+}
