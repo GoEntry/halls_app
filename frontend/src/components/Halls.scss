@@ -13,6 +13,7 @@
     background-size: auto;
     height: 100%;
     overflow: hidden;
+    min-width: 320px;
 
     @include mq-between(lg, xl) {
       position: relative;
@@ -24,7 +25,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: start;
-    align-content: flex-start;
+    align-content: center;
     gap: 16px;
     margin: 110px 25px;
 
@@ -95,7 +96,7 @@
 
   .dateTimeWrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     column-gap: 10px;
 
     @include tn {
@@ -124,11 +125,11 @@
 
     @include md {
       align-items: flex-start;
-      font-size: 52px;
+      font-size: 64px;
     }
 
     @include xxs {
-      font-size: 36px;
+      font-size: 56px;
     }
   }
 
@@ -157,17 +158,20 @@
 
     @include md {
       align-items: flex-start;
-      font-size: 52px;
-    }
-
-    @include xxs {
-      font-size: 36px;
     }
   }
 
   .monthDisplay_span0 {
     font: 600 0.375em/1.2 "Brotesk (Trial)", Helvetica, Arial, serif;
     margin-top: 40px;
+
+    @include md {
+      margin-top: 20px;
+    }
+
+    @include xxs {
+      margin-top: 10px;
+    }
 
   }
 
@@ -195,7 +199,7 @@
 
     @include md {
       align-items: flex-start;
-      font-size: 52px;
+      font-size: 64px;
     }
 
     @include xs {
@@ -203,7 +207,7 @@
     }
 
     @include xxs {
-      font-size: 36px;
+      font-size: 56px;
     }
   }
 
@@ -214,12 +218,16 @@
     height: 4px;
     object-fit: cover;
 
+    @media(max-width: 991px) {
+      margin: 65px 1px 85px 3px;
+    }
+
     @include xs {
-      margin: 75.1px 1px 80px 3px;
+      margin: 59px 1px 85px 3px;
     }
 
     @include tn {
-      margin: 50px 1px 50px 3px;
+      margin: 56px 1px 85px 3px;
     }
   }
 
@@ -302,6 +310,8 @@
     border-radius: 29px;
     transition: transform 0.7s ease, box-shadow 0.7s ease;
 
+    
+
     @include md {
       position: relative;
       width: 100%;
@@ -349,8 +359,7 @@
     display: flex;
     flex-direction: column;
     row-gap: 0;
-    width: 125px;
-    max-width: 85%;
+    max-width: 88%;
   }
 
   .distanceMetric {
@@ -369,10 +378,11 @@
 
   .caloriesMetric {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     font: 600 22px/1.2 Brotesk, Helvetica, Arial, serif;
     color: rgb(0 0 0);
     text-align: right;
+    padding-left: 60px;
 
     @include md {
       align-items: flex-start;
@@ -386,10 +396,11 @@
 
   .pulseMetric {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     font: 600 22px/1.2 Brotesk, Helvetica, Arial, serif;
     color: rgb(0 0 0);
     text-align: right;
+    padding-left: 60px;
 
     @include md {
       align-items: flex-start;
@@ -414,6 +425,11 @@
     width: 98.97%;
     border-radius: 20px;
     object-fit: cover;
+
+    @media(max-width: 991px) {
+      max-width: 50%;
+      margin: 31px auto 0;
+    }
 
     @include sm {
       position: relative;
@@ -533,47 +549,100 @@
     min-width: 0;
     background-color: rgb(255 255 255 / 63.1%);
     border-radius: 29px;
+    
+    @media (max-width: 1125px) {
+      flex-direction: row;
+      width: 100%;
+    }
   }
+
 
   .flex_col {
     display: flex;
     flex-direction: column;
     margin: 55px 10px 59px 16px;
+
+    @media (max-width: 1125px) {
+      flex-direction: row;
+      width: 95%;
+      justify-content: space-between;
+      padding: 0 10px;
+    }
+
+    @media (max-width: 990px) {
+      width: 100%;
+    }
   }
 
   .image15 {
     margin: 0 0 0 7px;
     width: 75px;
     border-radius: 10px;
-    transition: transform 0.7s ease, box-shadow 0.7s ease;
+    transition: transform 0.7s ease;
+
+    @media (max-width: 1125px) {
+      margin: 0;
+    }
+
+    @media (max-width: 420px) {
+      width: 60px;
+    }
   }
 
   .image15:hover {
     transform: translateY(-15px); /* Приподнимаем блок на 10 пикселей */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Добавляем тень для эффекта */
   }
 
   .image7 {
     margin: 100px 10px 0 9px;
     width: 63px;
     border-radius: 10px;
-    transition: transform 0.7s ease, box-shadow 0.7s ease;
+    transition: transform 0.7s ease;
+
+    @media (max-width: 1125px) {
+      margin: 0;
+    }
+
+    @media (max-width: 420px) {
+      width: 60px;
+    }
   }
 
   .image7:hover {
     transform: translateY(-15px); /* Приподнимаем блок на 10 пикселей */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Добавляем тень для эффекта */
   }
 
-  .image9 {
+  .image9 { 
     margin: 90px 7px 0 0;
     width: 75px;
     border-radius: 10px;
-    transition: transform 0.7s ease, box-shadow 0.7s ease;
+    transition: transform 0.7s ease;
+
+    @media (max-width: 1125px) {
+      margin: 0;
+    }
+
+    @media (max-width: 420px) {
+      width: 60px;
+    }
   }
 
   .image9:hover {
     transform: translateY(-15px); /* Приподнимаем блок на 10 пикселей */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Добавляем тень для эффекта */
+  }
+
+  .modalContent {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255 255 255 / 80%);
+    border-radius: 29px;
+    font: 600 22px/1.2 Brotesk, Helvetica, Arial, serif;
+    color: rgb(0 0 0);
+    transition: transform 0.7s ease, box-shadow 0.7s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .modalContent:hover {
+    transform: translateY(-15px);
   }
 }
