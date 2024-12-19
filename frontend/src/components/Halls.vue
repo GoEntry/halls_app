@@ -68,6 +68,9 @@
           <p class="logTitle">
             журнал<br/>тренировок
           </p>
+          <p class="logTitle">
+            журнал<br/>тренировок
+          </p>
         </article>
       </section>
 
@@ -134,6 +137,23 @@
         </div>
       </div>
 
+      <!-- Modal for Add Training -->
+      <div v-if="isAddTrainingModalOpen" class="modal show" @click.self="toggleAddTrainingModal">
+        <div class="modalContent">
+          <span class="closeButton" @click="toggleAddTrainingModal">&times;</span>
+          <h2>Добавить тренировку</h2>
+          <form @submit.prevent="addTraining">
+            <label for="trainingType">Тип тренировки:</label>
+            <input type="text" id="trainingType" v-model="newTraining.type" required />
+            <label for="distance">Расстояние (км):</label>
+            <input type="number" id="distance" v-model="newTraining.distance" required />
+            <label for="pulse">Пульс (уд/мин):</label>
+            <input type="number" id="pulse" v-model="newTraining.pulse" required />
+            <button type="submit">Добавить</button>
+          </form>
+        </div>
+      </div>
+
       <!-- Modal for Training Log -->
       <div v-if="isTrainingLogModalOpen" class="modal show" @click.self="toggleTrainingLogModal">
         <div class="modalContent">
@@ -141,6 +161,7 @@
           <h2>Журнал тренировок</h2>
           <ul>
             <li v-for="(entry, index) in trainingLog" :key="index">
+              {{ entry.type }} - {{ entry.distance }} км - {{ entry.pulse }} уд/мин - {{ entry.kcal }} ккал
               {{ entry.type }} - {{ entry.distance }} км - {{ entry.pulse }} уд/мин - {{ entry.kcal }} ккал
             </li>
           </ul>
