@@ -38,6 +38,7 @@
       </section>
 
       <article class="lastTrainingCard" @click="toggleLastTrainingModal">
+      <article class="lastTrainingCard" @click="toggleLastTrainingModal">
         <!-- Last training session summary and statistics -->
 
         <div class="trainingStats">
