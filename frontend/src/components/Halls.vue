@@ -15,7 +15,7 @@
                 </div>
               </div>
               <div class="timeDisplay">
-                <p class="timeText">17<br />00</p>
+                <p class="timeText">18<br />00</p>
                 <img
                   class="dividerLine"
                   src="/assets/12846dc73fe8737bea0ba8acac6f6006.svg"
@@ -65,30 +65,17 @@
           </div>
         </article>
         <article class="trainingLogCard" @click="toggleTrainingLogModal">
-          <p class="logTitle">журнал<br />тренировок</p>
+          <p class="logTitle">
+            журнал<br/>тренировок
+          </p>
         </article>
       </section>
 
       <div class="wrapper2">
         <div class="flex_col">
-          <img
-            class="image_training"
-            @click="toggleModal"
-            src="/assets/15a4a024ce8a1adbb5084269305518c9.svg"
-            alt="alt text"
-          />
-          <img
-            class="image_videos"
-            @click="toggleVideosModal"
-            src="/assets/99b61546705c23a6304528e7b7332781.svg"
-            alt="alt text"
-          />
-          <img
-            class="image_eat"
-            @click="toggleDietsModal"
-            src="/assets/7f63fbbb7cc3a03652d0b3fe30352183.svg"
-            alt="alt text"
-          />
+          <img class="image_training" @click="toggleModal" src="/assets/15a4a024ce8a1adbb5084269305518c9.svg" alt="alt text" />
+          <img class="image_videos" src="/assets/99b61546705c23a6304528e7b7332781.svg" alt="alt text" />
+          <img class="image_eat" src="/assets/7f63fbbb7cc3a03652d0b3fe30352183.svg" alt="alt text" />
         </div>
       </div>
 
@@ -154,67 +141,13 @@
           <h2>Журнал тренировок</h2>
           <ul>
             <li v-for="(entry, index) in trainingLog" :key="index">
-              {{ entry.type }} - {{ entry.distance }} км - {{ entry.pulse }} уд/мин -
-              {{ entry.kcal }} ккал
+              {{ entry.type }} - {{ entry.distance }} км - {{ entry.pulse }} уд/мин - {{ entry.kcal }} ккал
             </li>
           </ul>
         </div>
       </div>
 
-      <!-- Modal for Videos -->
-      <div v-if="isVideosModalOpen" class="modal show" @click.self="toggleVideosModal">
-        <div class="modalContent">
-          <span class="closeButton" @click="toggleVideosModal">&times;</span>
-          <h2>Видео для домашней тренировки</h2>
-          <ul>
-            <li>
-              <a
-                href="https://www.youtube.com/watch?v=J3tRz0pyfys&pp=
-              ygUl0LTQvtC80LDRiNC90LjQtSDRgtGA0LXQvdC40YDQvtCy0LrQuA%3D%3D"
-                target="_blank"
-                >Тренировка для МУЖЧИН без железа в домашних условиях</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://www.youtube.com/watch?v=ESMmH-JfPCY&pp=
-              ygUl0LTQvtC80LDRiNC90LjQtSDRgtGA0LXQvdC40YDQvtCy0LrQuA%3D%3D"
-                target="_blank"
-                >Сжигаем калории за 15 минут</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://www.youtube.com/watch?v=X9hhzhwlVww&pp=
-              ygUl0LTQvtC80LDRiNC90LjQtSDRgtGA0LXQvdC40YDQvtCy0LrQuA%3D%3D"
-                target="_blank"
-                >Растяжка всего тела за 10 минут</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://www.youtube.com/watch?v=rL2_d4F7SjE&pp=
-              ygUl0LTQvtC80LDRiNC90LjQtSDRgtGA0LXQvdC40YDQvtCy0LrQuA%3D%3D"
-                target="_blank"
-                >Тренировка на все тело за 15 минут</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
 
-      <!-- Modal for Diets -->
-      <div v-if="isDietsModalOpen" class="modal show" @click.self="toggleDietsModal">
-        <div class="modalContent">
-          <span class="closeButton" @click="toggleDietsModal">&times;</span>
-          <h2>Выбор диеты</h2>
-          <ul>
-            <li>2000 ккал: Завтрак - Овсянка, Обед - Курица с рисом, Ужин - Салат</li>
-            <li>3000 ккал: Завтрак - Омлет, Обед - Стейк с картофелем, Ужин - Паста</li>
-            <li>4000 ккал: Завтрак - Блины, Обед - Пицца, Ужин - Бургер</li>
-          </ul>
-        </div>
-      </div>
     </main>
   </div>
 </template>
@@ -302,7 +235,7 @@ export default {
         JSON.stringify({
           weightGoal: this.weightGoal,
           completionDate: this.completionDate,
-        }),
+        })
       )
       console.log(`Weight Goal: ${this.weightGoal}, Completion Date: ${this.completionDate}`)
       this.toggleWeightGoalModal()
@@ -319,7 +252,7 @@ export default {
       const calories = this.calculateCalories(
         this.newTraining.type,
         this.newTraining.distance,
-        this.newTraining.pulse,
+        this.newTraining.pulse
       )
       this.newTraining.kcal = calories
       this.trainingLog.push({ ...this.newTraining })
@@ -368,9 +301,7 @@ export default {
   width: 500px;
   text-align: center;
   transform: translateY(100%);
-  transition:
-    transform 0.7s ease,
-    opacity 0.7s ease-in-out;
+  transition: transform 0.7s ease, opacity 0.7s ease-in-out;
   opacity: 0;
   font-family: inherit;
   position: relative;

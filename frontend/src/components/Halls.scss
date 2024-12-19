@@ -176,7 +176,6 @@
     @include xxs {
       margin-top: 10px;
     }
-
   }
 
   .timeDisplay {
@@ -559,6 +558,7 @@
   }
 
 
+
   .flex_col {
     display: flex;
     flex-direction: column;
@@ -589,6 +589,7 @@
     @media (max-width: 420px) {
       width: 60px;
     }
+    transition: transform 0.7s ease;
   }
 
   .image_training:hover {
@@ -608,6 +609,7 @@
     @media (max-width: 420px) {
       width: 60px;
     }
+    transition: transform 0.7s ease;
   }
 
   .image_videos:hover {
