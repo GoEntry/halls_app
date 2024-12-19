@@ -6,7 +6,7 @@
       <!-- Main dashboard layout with training information and controls -->
 
       <section class="leftColumn">
-        <article class="nextTrainingCard" @click="toggleModal">
+        <article class="nextTrainingCard">
           <div class="trainingInfo">
             <p class="trainingTitle">
               следующая<br/>тренировка
@@ -27,7 +27,7 @@
             </div>
           </div>
         </article>
-        <article class="weightGoalCard" @click="toggleWeightGoalModal">
+        <article class="weightGoalCard">
           <div class="goalContent">
             <p class="goalTitle">
               цель по<br/>весу
@@ -37,7 +37,7 @@
         </article>
       </section>
 
-      <article class="lastTrainingCard" @click="toggleLastTrainingModal">
+      <article class="lastTrainingCard">
         <!-- Last training session summary and statistics -->
 
         <div class="trainingStats">
@@ -80,7 +80,7 @@
       </div>
 
       <!-- Modal Window -->
-      <div v-if="isModalOpen" class="modal show" @click.self="toggleModal">
+      <div class="modal show" >
         <div class="modalContent">
           <span class="closeButton" @click="toggleModal">&times;</span>
           <h2>Детали встречи</h2>
@@ -92,9 +92,9 @@
       </div>
 
       <!-- Weight Goal Modal Window -->
-      <div v-if="isWeightGoalModalOpen" class="modal show" @click.self="toggleWeightGoalModal">
+      <div class="modal show">
         <div class="modalContent">
-          <span class="closeButton" @click="toggleWeightGoalModal">&times;</span>
+          <span class="closeButton">&times;</span>
           <h2>Цель по весу</h2>
           <label for="weight">Целевой вес (кг):</label>
           <input type="number" id="weight" v-model="weightGoal" />
@@ -105,7 +105,7 @@
       </div>
 
       <!-- Modal for Last Training Details -->
-      <div v-if="showLastTrainingModal" class="modal show">
+      <div class="modal show">
         <div class="modalContent">
           <h2>Детали Последней Тренировки</h2>
           <p>Время: {{ lastTraining.time }}</p>
