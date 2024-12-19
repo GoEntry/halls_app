@@ -6,7 +6,7 @@
       <!-- Main dashboard layout with training information and controls -->
 
       <section class="leftColumn">
-        <article class="nextTrainingCard" @click="toggleModal">
+        <article class="nextTrainingCard">
           <div class="trainingInfo">
             <p class="trainingTitle">
               следующая<br/>тренировка
@@ -76,18 +76,6 @@
           <img class="image15" src="/assets/15a4a024ce8a1adbb5084269305518c9.svg" alt="alt text" />
           <img class="image7" src="/assets/99b61546705c23a6304528e7b7332781.svg" alt="alt text" />
           <img class="image9" src="/assets/7f63fbbb7cc3a03652d0b3fe30352183.svg" alt="alt text" />
-        </div>
-      </div>
-
-      <!-- Modal Window -->
-      <div v-if="isModalOpen" class="modal show" @click.self="toggleModal">
-        <div class="modalContent">
-          <span class="closeButton" @click="toggleModal">&times;</span>
-          <h2>Детали встречи</h2>
-          <p>Дата: 25 декабря</p>
-          <p>Время: 17:00</p>
-          <p>Место: Спортзал "DTX"</p>
-          <p>Тренер: Лущев Евгений</p>
         </div>
       </div>
 
