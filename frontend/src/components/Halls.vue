@@ -37,7 +37,7 @@
         </article>
       </section>
 
-      <article class="lastTrainingCard">
+      <article class="lastTrainingCard" @click="toggleLastTrainingModal">
         <!-- Last training session summary and statistics -->
 
         <div class="trainingStats">
@@ -104,6 +104,18 @@
         </div>
       </div>
 
+      <!-- Modal for Last Training Details -->
+      <div v-if="showLastTrainingModal" class="modal show">
+        <div class="modalContent">
+          <h2>Детали Последней Тренировки</h2>
+          <p>Время: {{ lastTraining.time }}</p>
+          <p>Тип тренировки: {{ lastTraining.type }}</p>
+          <p>Расстояние: {{ lastTraining.distance }} км</p>
+          <p>Ккал: {{ lastTraining.kcal }}</p>
+          <p>Средний темп: {{ lastTraining.averagePace }} мин/км</p>
+          <button @click="toggleLastTrainingModal">Закрыть</button>
+        </div>
+      </div>
 
     </main>
   </div>
