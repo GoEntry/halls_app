@@ -56,7 +56,7 @@
         </div>
       </article>
       <section class="rightColumn">
-        <article class="addTrainingCard">
+        <article class="addTrainingCard" @click="toggleAddTrainingModal">
           <div class="addTrainingContent">
             <p class="addTrainingText">
               добавить<br/>тренировку
@@ -64,7 +64,7 @@
             <img class="addTrainingIcon" src="/assets/89ca88becca1db089b9b2cacf4d7cd38.png" alt="alt text" />
           </div>
         </article>
-        <article class="trainingLogCard">
+        <article class="trainingLogCard" @click="toggleTrainingLogModal">
           <p class="logTitle">
             журнал<br/>тренировок
           </p>
@@ -73,9 +73,9 @@
 
       <div class="wrapper2">
         <div class="flex_col">
-          <img class="image15" src="/assets/15a4a024ce8a1adbb5084269305518c9.svg" alt="alt text" />
-          <img class="image7" src="/assets/99b61546705c23a6304528e7b7332781.svg" alt="alt text" />
-          <img class="image9" src="/assets/7f63fbbb7cc3a03652d0b3fe30352183.svg" alt="alt text" />
+          <img class="image_training" @click="toggleModal" src="/assets/15a4a024ce8a1adbb5084269305518c9.svg" alt="alt text" />
+          <img class="image_videos" @click="toggleVideosModal" src="/assets/99b61546705c23a6304528e7b7332781.svg" alt="alt text" />
+          <img class="image_eat" src="/assets/7f63fbbb7cc3a03652d0b3fe30352183.svg" alt="alt text" />
         </div>
       </div>
 
@@ -114,6 +114,58 @@
           <p>Ккал: {{ lastTraining.kcal }}</p>
           <p>Средний темп: {{ lastTraining.averagePace }} мин/км</p>
           <button @click="toggleLastTrainingModal">Закрыть</button>
+        </div>
+      </div>
+
+      <!-- Modal for Add Training -->
+      <div v-if="isAddTrainingModalOpen" class="modal show" @click.self="toggleAddTrainingModal">
+        <div class="modalContent">
+          <span class="closeButton" @click="toggleAddTrainingModal">&times;</span>
+          <h2>Добавить тренировку</h2>
+          <form @submit.prevent="addTraining">
+            <label for="trainingType">Тип тренировки:</label>
+            <input type="text" id="trainingType" v-model="newTraining.type" required />
+            <label for="distance">Расстояние (км):</label>
+            <input type="number" id="distance" v-model="newTraining.distance" required />
+            <label for="pulse">Пульс (уд/мин):</label>
+            <input type="number" id="pulse" v-model="newTraining.pulse" required />
+            <button type="submit">Добавить</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Modal for Training Log -->
+      <div v-if="isTrainingLogModalOpen" class="modal show" @click.self="toggleTrainingLogModal">
+        <div class="modalContent">
+          <span class="closeButton" @click="toggleTrainingLogModal">&times;</span>
+          <h2>Журнал тренировок</h2>
+          <ul>
+            <li v-for="(entry, index) in trainingLog" :key="index">
+              {{ entry.type }} - {{ entry.distance }} км - {{ entry.pulse }} уд/мин - {{ entry.kcal }} ккал
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Modal for Videos -->
+      <div v-if="isVideosModalOpen" class="modal show" @click.self="toggleVideosModal">
+        <div class="modalContent">
+          <span class="closeButton" @click="toggleVideosModal">&times;</span>
+          <h2>Видео для домашней тренировки</h2>
+          <ul>
+            <li><a href="https://www.youtube.com/watch?v=J3tRz0pyfys&pp=
+              ygUl0LTQvtC80LDRiNC90LjQtSDRgtGA0LXQvdC40YDQvtCy0LrQuA%3D%3D" 
+              target="_blank">Тренировка для МУЖЧИН без железа в домашних условиях</a></li>
+            <li><a href="https://www.youtube.com/watch?v=ESMmH-JfPCY&pp=
+              ygUl0LTQvtC80LDRiNC90LjQtSDRgtGA0LXQvdC40YDQvtCy0LrQuA%3D%3D" 
+              target="_blank">Сжигаем калории за 15 минут</a></li>
+            <li><a href="https://www.youtube.com/watch?v=X9hhzhwlVww&pp=
+              ygUl0LTQvtC80LDRiNC90LjQtSDRgtGA0LXQvdC40YDQvtCy0LrQuA%3D%3D" 
+              target="_blank">Растяжка всего тела за 10 минут</a></li>
+            <li><a href="https://www.youtube.com/watch?v=rL2_d4F7SjE&pp=
+              ygUl0LTQvtC80LDRiNC90LjQtSDRgtGA0LXQvdC40YDQvtCy0LrQuA%3D%3D" 
+              target="_blank">Тренировка на все тело за 15 минут</a></li>
+          </ul>
         </div>
       </div>
 
