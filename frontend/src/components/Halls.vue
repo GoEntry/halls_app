@@ -68,9 +68,6 @@
           <p class="logTitle">
             журнал<br/>тренировок
           </p>
-          <p class="logTitle">
-            журнал<br/>тренировок
-          </p>
         </article>
       </section>
 
@@ -161,7 +158,6 @@
           <h2>Журнал тренировок</h2>
           <ul>
             <li v-for="(entry, index) in trainingLog" :key="index">
-              {{ entry.type }} - {{ entry.distance }} км - {{ entry.pulse }} уд/мин - {{ entry.kcal }} ккал
               {{ entry.type }} - {{ entry.distance }} км - {{ entry.pulse }} уд/мин - {{ entry.kcal }} ккал
             </li>
           </ul>
