@@ -6,7 +6,7 @@
       <!-- Main dashboard layout with training information and controls -->
 
       <section class="leftColumn">
-        <article class="nextTrainingCard">
+        <article class="nextTrainingCard" @click="toggleModal">
           <div class="trainingInfo">
             <p class="trainingTitle">
               следующая<br/>тренировка
@@ -79,7 +79,19 @@
         </div>
       </div>
 
-      
+      <!-- Modal Window -->
+      <div v-if="isModalOpen" class="modal show" @click.self="toggleModal">
+        <div class="modalContent">
+          <span class="closeButton" @click="toggleModal">&times;</span>
+          <h2>Детали встречи</h2>
+          <p>Дата: 25 декабря</p>
+          <p>Время: 17:00</p>
+          <p>Место: Спортзал "DTX"</p>
+          <p>Тренер: Лущев Евгений</p>
+        </div>
+      </div>
+
+
     </main>
   </div>
 
