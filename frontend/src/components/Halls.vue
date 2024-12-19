@@ -130,6 +130,43 @@
         </div>
       </div>
 
+      <!-- Modal Window -->
+      <div v-if="isModalOpen" class="modal show" @click.self="toggleModal">
+        <div class="modalContent">
+          <span class="closeButton" @click="toggleModal">&times;</span>
+          <h2>Детали встречи</h2>
+          <p>Дата: 25 декабря</p>
+          <p>Время: 17:00</p>
+          <p>Место: Спортзал "DTX"</p>
+          <p>Тренер: Лущев Евгений</p>
+        </div>
+      </div>
+
+      <!-- Weight Goal Modal Window -->
+      <div v-if="isWeightGoalModalOpen" class="modal show" @click.self="toggleWeightGoalModal">
+        <div class="modalContent">
+          <span class="closeButton" @click="toggleWeightGoalModal">&times;</span>
+          <h2>Цель по весу</h2>
+          <label for="weight">Целевой вес (кг):</label>
+          <input type="number" id="weight" v-model="weightGoal" />
+          <label for="completionDate">Дата завершения:</label>
+          <input type="date" id="completionDate" v-model="completionDate" />
+          <button @click="saveWeightGoal">Сохранить</button>
+        </div>
+      </div>
+
+      <!-- Modal for Last Training Details -->
+      <div v-if="showLastTrainingModal" class="modal show">
+        <div class="modalContent">
+          <h2>Детали Последней Тренировки</h2>
+          <p>Время: {{ lastTraining.time }}</p>
+          <p>Тип тренировки: {{ lastTraining.type }}</p>
+          <p>Расстояние: {{ lastTraining.distance }} км</p>
+          <p>Ккал: {{ lastTraining.kcal }}</p>
+          <p>Средний темп: {{ lastTraining.averagePace }} мин/км</p>
+          <button @click="toggleLastTrainingModal">Закрыть</button>
+        </div>
+      </div>
 
     </main>
   </div>
