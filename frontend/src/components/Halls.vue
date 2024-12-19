@@ -27,7 +27,7 @@
             </div>
           </div>
         </article>
-        <article class="weightGoalCard">
+        <article class="weightGoalCard" @click="toggleWeightGoalModal">
           <div class="goalContent">
             <p class="goalTitle">
               цель по<br/>весу
@@ -88,6 +88,19 @@
           <p>Время: 17:00</p>
           <p>Место: Спортзал "DTX"</p>
           <p>Тренер: Лущев Евгений</p>
+        </div>
+      </div>
+
+      <!-- Weight Goal Modal Window -->
+      <div v-if="isWeightGoalModalOpen" class="modal show" @click.self="toggleWeightGoalModal">
+        <div class="modalContent">
+          <span class="closeButton" @click="toggleWeightGoalModal">&times;</span>
+          <h2>Цель по весу</h2>
+          <label for="weight">Целевой вес (кг):</label>
+          <input type="number" id="weight" v-model="weightGoal" />
+          <label for="completionDate">Дата завершения:</label>
+          <input type="date" id="completionDate" v-model="completionDate" />
+          <button @click="saveWeightGoal">Сохранить</button>
         </div>
       </div>
 
