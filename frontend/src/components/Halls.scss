@@ -29,6 +29,10 @@
     gap: 16px;
     margin: 110px 25px;
 
+    @media(max-width: 991px) {
+      margin: 50px 25px;
+    }
+
     @include mq-between(lg, xxl) {
       justify-content: center;
     }
@@ -310,8 +314,6 @@
     border-radius: 29px;
     transition: transform 0.7s ease, box-shadow 0.7s ease;
 
-    
-
     @include md {
       position: relative;
       width: 100%;
@@ -574,7 +576,7 @@
     }
   }
 
-  .image15 {
+  .image_training {
     margin: 0 0 0 7px;
     width: 75px;
     border-radius: 10px;
@@ -589,11 +591,11 @@
     }
   }
 
-  .image15:hover {
+  .image_training:hover {
     transform: translateY(-15px); /* Приподнимаем блок на 10 пикселей */
   }
 
-  .image7 {
+  .image_videos {
     margin: 100px 10px 0 9px;
     width: 63px;
     border-radius: 10px;
@@ -608,11 +610,11 @@
     }
   }
 
-  .image7:hover {
+  .image_videos:hover {
     transform: translateY(-15px); /* Приподнимаем блок на 10 пикселей */
   }
 
-  .image9 { 
+  .image_eat { 
     margin: 90px 7px 0 0;
     width: 75px;
     border-radius: 10px;
@@ -627,7 +629,7 @@
     }
   }
 
-  .image9:hover {
+  .image_eat:hover {
     transform: translateY(-15px); /* Приподнимаем блок на 10 пикселей */
   }
 
