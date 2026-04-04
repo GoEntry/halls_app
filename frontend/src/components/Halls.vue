@@ -1,389 +1,231 @@
-
 <template>
-  <div class="halls dashboardContainer">
-    <main class="mainLayout">
-      <!-- Main dashboard layout with training information and controls -->
-
-      <section class="leftColumn">
-        <article class="nextTrainingCard" @click="toggleModal">
-          <div class="trainingInfo">
-            <p class="trainingTitle">
-              следующая<br/>тренировка
-            </p>
-            <div class="dateTimeWrapper">
-              <div class="dateContainer">
-                <div class="dayDisplay"><span class="dayDisplay_span0">25</span></div>
-                <div class="monthWrapper">
-                  <div class="monthDisplay"><span class="monthDisplay_span0">декабря</span></div>
-              </div>
-              </div>
-              <div class="timeDisplay">
-                <p class="timeText">
-                  17<br/>00
-                </p>
-                <img class="dividerLine" src="/assets/12846dc73fe8737bea0ba8acac6f6006.svg" alt="alt text" />
-              </div>
-            </div>
-          </div>
-        </article>
-        <article class="weightGoalCard" @click="toggleWeightGoalModal">
-          <div class="goalContent">
-            <p class="goalTitle">
-              цель по<br/>весу
-            </p>
-            <p class="weightTarget">{{ weightGoal }} кг</p>
-          </div>
-        </article>
+  <div class="dashboard">
+    <main class="dashboard__layout">
+      <section class="dashboard__column">
+        <NextTrainingCard @click="modals.nextTraining = true" />
+        <WeightGoalCard :weight="weightGoal.weight" @click="modals.weightGoal = true" />
       </section>
 
-      <article class="lastTrainingCard" @click="toggleLastTrainingModal">
-        <!-- Last training session summary and statistics -->
+      <LastTrainingCard :training="lastTraining" @click="modals.lastTraining = true" />
 
-        <div class="trainingStats">
-          <div class="statsContent">
-            <p class="statsTitle">
-              Последняя<br/>тренировка
-            </p>
-            <div class="metricsContainer">
-              <p class="distanceMetric">Расстояние: {{ lastTraining.distance }} км</p>
-              <p class="caloriesMetric">Ккалл:  {{ lastTraining.kcal }}</p>
-              <p class="pulseMetric">Пульс: {{ lastTraining.pulse }}у/м</p>
-            </div>
-          </div>
-          <div class="colorIndicator"></div>
-          <img class="statsGraph" src="/assets/ec6e34c30518a88257c0d143e3b59ef6.png" alt="alt text" />
-        </div>
-      </article>
-      <section class="rightColumn">
-        <article class="addTrainingCard" @click="toggleAddTrainingModal">
-          <div class="addTrainingContent">
-            <p class="addTrainingText">
-              добавить<br/>тренировку
-            </p>
-            <img class="addTrainingIcon" src="/assets/89ca88becca1db089b9b2cacf4d7cd38.png" alt="alt text" />
-          </div>
-        </article>
-        <article class="trainingLogCard" @click="toggleTrainingLogModal">
-          <p class="logTitle">
-            журнал<br/>тренировок
-          </p>
-        </article>
+      <section class="dashboard__column">
+        <AddTrainingCard @click="modals.addTraining = true" />
+        <TrainingLogCard @click="modals.trainingLog = true" />
       </section>
 
-      <div class="wrapper2">
-        <div class="flex_col">
-          <img class="image_training" @click="toggleModal" src="/assets/15a4a024ce8a1adbb5084269305518c9.svg" alt="alt text" />
-          <img class="image_videos" @click="toggleVideosModal" src="/assets/99b61546705c23a6304528e7b7332781.svg" alt="alt text" />
-          <img class="image_eat" @click="toggleDietsModal" src="/assets/7f63fbbb7cc3a03652d0b3fe30352183.svg" alt="alt text" />
-        </div>
-      </div>
-
-      <!-- Modal Window -->
-      <div v-if="isModalOpen" class="modal show" @click.self="toggleModal">
-        <div class="modalContent">
-          <span class="closeButton" @click="toggleModal">&times;</span>
-          <h2>Детали встречи</h2>
-          <p>Дата: 25 декабря</p>
-          <p>Время: 17:00</p>
-          <p>Место: Спортзал "DTX"</p>
-          <p>Тренер: Лущев Евгений</p>
-        </div>
-      </div>
-
-      <!-- Weight Goal Modal Window -->
-      <div v-if="isWeightGoalModalOpen" class="modal show" @click.self="toggleWeightGoalModal">
-        <div class="modalContent">
-          <span class="closeButton" @click="toggleWeightGoalModal">&times;</span>
-          <h2>Цель по весу</h2>
-          <label for="weight">Целевой вес (кг):</label>
-          <input type="number" id="weight" v-model="weightGoal" />
-          <label for="completionDate">Дата завершения:</label>
-          <input type="date" id="completionDate" v-model="completionDate" />
-          <button @click="saveWeightGoal">Сохранить</button>
-        </div>
-      </div>
-
-      <!-- Modal for Last Training Details -->
-      <div v-if="showLastTrainingModal" class="modal show">
-        <div class="modalContent">
-          <h2>Детали Последней Тренировки</h2>
-          <p>Время: {{ lastTraining.time }}</p>
-          <p>Тип тренировки: {{ lastTraining.type }}</p>
-          <p>Расстояние: {{ lastTraining.distance }} км</p>
-          <p>Ккал: {{ lastTraining.kcal }}</p>
-          <p>Средний темп: {{ lastTraining.averagePace }} мин/км</p>
-          <button @click="toggleLastTrainingModal">Закрыть</button>
-        </div>
-      </div>
-
-      <!-- Modal for Add Training -->
-      <div v-if="isAddTrainingModalOpen" class="modal show" @click.self="toggleAddTrainingModal">
-        <div class="modalContent">
-          <span class="closeButton" @click="toggleAddTrainingModal">&times;</span>
-          <h2>Добавить тренировку</h2>
-          <form @submit.prevent="addTraining">
-            <label for="trainingType">Тип тренировки:</label>
-            <input type="text" id="trainingType" v-model="newTraining.type" required />
-            <label for="distance">Расстояние (км):</label>
-            <input type="number" id="distance" v-model="newTraining.distance" required />
-            <label for="pulse">Пульс (уд/мин):</label>
-            <input type="number" id="pulse" v-model="newTraining.pulse" required />
-            <button type="submit">Добавить</button>
-          </form>
-        </div>
-      </div>
-
-      <!-- Modal for Training Log -->
-      <div v-if="isTrainingLogModalOpen" class="modal show" @click.self="toggleTrainingLogModal">
-        <div class="modalContent">
-          <span class="closeButton" @click="toggleTrainingLogModal">&times;</span>
-          <h2>Журнал тренировок</h2>
-          <ul>
-            <li v-for="(entry, index) in trainingLog" :key="index">
-              {{ entry.type }} - {{ entry.distance }} км - {{ entry.pulse }} уд/мин - {{ entry.kcal }} ккал
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Modal for Videos -->
-      <div v-if="isVideosModalOpen" class="modal show" @click.self="toggleVideosModal">
-        <div class="modalContent">
-          <span class="closeButton" @click="toggleVideosModal">&times;</span>
-          <h2>Видео для домашней тренировки</h2>
-          <ul>
-            <li><a href="https://www.youtube.com/watch?v=J3tRz0pyfys&pp=
-              ygUl0LTQvtC80LDRiNC90LjQtSDRgtGA0LXQvdC40YDQvtCy0LrQuA%3D%3D" 
-              target="_blank">Тренировка для МУЖЧИН без железа в домашних условиях</a></li>
-            <li><a href="https://www.youtube.com/watch?v=ESMmH-JfPCY&pp=
-              ygUl0LTQvtC80LDRiNC90LjQtSDRgtGA0LXQvdC40YDQvtCy0LrQuA%3D%3D" 
-              target="_blank">Сжигаем калории за 15 минут</a></li>
-            <li><a href="https://www.youtube.com/watch?v=X9hhzhwlVww&pp=
-              ygUl0LTQvtC80LDRiNC90LjQtSDRgtGA0LXQvdC40YDQvtCy0LrQuA%3D%3D" 
-              target="_blank">Растяжка всего тела за 10 минут</a></li>
-            <li><a href="https://www.youtube.com/watch?v=rL2_d4F7SjE&pp=
-              ygUl0LTQvtC80LDRiNC90LjQtSDRgtGA0LXQvdC40YDQvtCy0LrQuA%3D%3D" 
-              target="_blank">Тренировка на все тело за 15 минут</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Modal for Diets -->
-      <div v-if="isDietsModalOpen" class="modal show" @click.self="toggleDietsModal">
-        <div class="modalContent">
-          <span class="closeButton" @click="toggleDietsModal">&times;</span>
-          <h2>Выбор диеты</h2>
-          <ul>
-            <li>2000 ккал: Завтрак - Овсянка, Обед - Курица с рисом, Ужин - Салат</li>
-            <li>3000 ккал: Завтрак - Омлет, Обед - Стейк с картофелем, Ужин - Паста</li>
-            <li>4000 ккал: Завтрак - Блины, Обед - Пицца, Ужин - Бургер</li>
-          </ul>
+      <div class="dashboard__actions">
+        <div class="dashboard__actions-inner">
+          <img 
+            class="dashboard__action-icon" 
+            src="/assets/15a4a024ce8a1adbb5084269305518c9.svg" 
+            alt="Тренировки" 
+            @click="modals.nextTraining = true" 
+          />
+          <img 
+            class="dashboard__action-icon" 
+            src="/assets/99b61546705c23a6304528e7b7332781.svg" 
+            alt="Видео" 
+            @click="modals.videos = true" 
+          />
+          <img 
+            class="dashboard__action-icon" 
+            src="/assets/7f63fbbb7cc3a03652d0b3fe30352183.svg" 
+            alt="Питание" 
+            @click="modals.diets = true" 
+          />
         </div>
       </div>
     </main>
-  </div>
 
+    <!-- Modals -->
+    <NextTrainingModal v-model="modals.nextTraining" />
+    <WeightGoalModal 
+      v-model="modals.weightGoal" 
+      :weight="weightGoal.weight"
+      :completion-date="weightGoal.completionDate"
+      @save="handleWeightGoalSave" 
+    />
+    <LastTrainingModal 
+      v-model="modals.lastTraining" 
+      :training="lastTraining" 
+    />
+    <AddTrainingModal 
+      v-model="modals.addTraining" 
+      @add="handleAddTraining" 
+    />
+    <TrainingLogModal 
+      v-model="modals.trainingLog" 
+      :trainings="trainingLog" 
+    />
+    <VideosModal v-model="modals.videos" />
+    <DietsModal v-model="modals.diets" />
+  </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      isModalOpen: false,
-      isWeightGoalModalOpen: false,
-      showLastTrainingModal: false,
-      isAddTrainingModalOpen: false,
-      isTrainingLogModalOpen: false,
-      isVideosModalOpen: false,
-      isDietsModalOpen: false,
-      weightGoal: 50, // default weight goal
-      completionDate: '', // default completion date
-      lastTraining: {
-        time: '30:00',
-        type: 'Бег',
-        distance: 5,
-        kcal: 300,
-        pulse: 120,
-        averagePace: 6,
-      },
-      newTraining: {
-        type: '',
-        distance: 0,
-        pulse: 0,
-        kcal: 0,
-      },
-      trainingLog: [
-        { type: 'Бег', distance: 5, pulse: 120, kcal: 300 },
-        { type: 'Велосипед', distance: 10, pulse: 110, kcal: 400 },
-        { type: 'Плавание', distance: 2, pulse: 130, kcal: 250 },
-        { type: 'Йога', distance: 0, pulse: 80, kcal: 200 },
-      ],
-    };
-  },
-  mounted() {
-    document.addEventListener('keydown', this.handleKeyDown);
-    this.loadTrainingLog();
-    this.loadWeightGoal();
-  },
-  beforeDestroy() {
-    document.removeEventListener('keydown', this.handleKeyDown);
-  },
-  methods: {
-    handleKeyDown(event) {
-      if (event.key === 'Escape') {
-        this.isModalOpen = false;
-        this.isWeightGoalModalOpen = false;
-        this.showLastTrainingModal = false;
-        this.isAddTrainingModalOpen = false;
-        this.isTrainingLogModalOpen = false;
-        this.isVideosModalOpen = false;
-        this.isDietsModalOpen = false;
-      }
-    },
-    toggleModal() {
-      this.isModalOpen = !this.isModalOpen;
-    },
-    toggleWeightGoalModal() {
-      this.isWeightGoalModalOpen = !this.isWeightGoalModalOpen;
-    },
-    toggleLastTrainingModal() {
-      this.showLastTrainingModal = !this.showLastTrainingModal;
-    },
-    toggleAddTrainingModal() {
-      this.isAddTrainingModalOpen = !this.isAddTrainingModalOpen;
-    },
-    toggleTrainingLogModal() {
-      this.isTrainingLogModalOpen = !this.isTrainingLogModalOpen;
-    },
-    toggleVideosModal() {
-      this.isVideosModalOpen = !this.isVideosModalOpen;
-    },
-    toggleDietsModal() {
-      this.isDietsModalOpen = !this.isDietsModalOpen;
-    },
-    saveWeightGoal() {
-      // Save the weight goal and completion date to localStorage
-      localStorage.setItem('weightGoal', JSON.stringify({
-        weightGoal: this.weightGoal,
-        completionDate: this.completionDate
-      }));
-      console.log(`Weight Goal: ${this.weightGoal}, Completion Date: ${this.completionDate}`);
-      this.toggleWeightGoalModal();
-    },
-    loadWeightGoal() {
-      const savedGoal = localStorage.getItem('weightGoal');
-      if (savedGoal) {
-        const { weightGoal, completionDate } = JSON.parse(savedGoal);
-        this.weightGoal = weightGoal;
-        this.completionDate = completionDate;
-      }
-    },
-    addTraining() {
-      const calories = this.calculateCalories(this.newTraining.type, this.newTraining.distance, this.newTraining.pulse);
-      this.newTraining.kcal = calories;
-      this.trainingLog.push({ ...this.newTraining });
-      // Save the training log to localStorage
-      localStorage.setItem('trainingLog', JSON.stringify(this.trainingLog));
-      this.toggleAddTrainingModal();
-    },
-    loadTrainingLog() {
-      const savedLog = localStorage.getItem('trainingLog');
-      if (savedLog) {
-        this.trainingLog = JSON.parse(savedLog);
-      }
-    },
-    calculateCalories(type, distance, pulse) {
-      // Simple calorie calculation logic
-      return distance * pulse * 0.1;
-    },
-  },
+<script setup>
+import { ref, reactive, onMounted, onBeforeUnmount } from 'vue';
+import { useLocalStorage } from '@/composables/useLocalStorage';
+
+import NextTrainingCard from './dashboard/NextTrainingCard.vue';
+import WeightGoalCard from './dashboard/WeightGoalCard.vue';
+import LastTrainingCard from './dashboard/LastTrainingCard.vue';
+import AddTrainingCard from './dashboard/AddTrainingCard.vue';
+import TrainingLogCard from './dashboard/TrainingLogCard.vue';
+
+import NextTrainingModal from './modals/NextTrainingModal.vue';
+import WeightGoalModal from './modals/WeightGoalModal.vue';
+import LastTrainingModal from './modals/LastTrainingModal.vue';
+import AddTrainingModal from './modals/AddTrainingModal.vue';
+import TrainingLogModal from './modals/TrainingLogModal.vue';
+import VideosModal from './modals/VideosModal.vue';
+import DietsModal from './modals/DietsModal.vue';
+
+const modals = reactive({
+  nextTraining: false,
+  weightGoal: false,
+  lastTraining: false,
+  addTraining: false,
+  trainingLog: false,
+  videos: false,
+  diets: false
+});
+
+const weightGoal = useLocalStorage('weightGoal', {
+  weight: 50,
+  completionDate: ''
+});
+
+const trainingLog = useLocalStorage('trainingLog', [
+  { type: 'Бег', distance: 5, pulse: 120, kcal: 300 },
+  { type: 'Велосипед', distance: 10, pulse: 110, kcal: 400 },
+  { type: 'Плавание', distance: 2, pulse: 130, kcal: 250 },
+  { type: 'Йога', distance: 0, pulse: 80, kcal: 200 }
+]);
+
+const lastTraining = ref({
+  time: '30:00',
+  type: 'Бег',
+  distance: 5,
+  kcal: 300,
+  pulse: 120,
+  averagePace: 6
+});
+
+const handleWeightGoalSave = ({ weight, completionDate }) => {
+  weightGoal.value = { weight, completionDate };
 };
+
+const handleAddTraining = (training) => {
+  trainingLog.value.push(training);
+};
+
+const handleKeyDown = (event) => {
+  if (event.key === 'Escape') {
+    Object.keys(modals).forEach(key => modals[key] = false);
+  }
+};
+
+onMounted(() => {
+  document.addEventListener('keydown', handleKeyDown);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener('keydown', handleKeyDown);
+});
 </script>
 
 <style scoped lang="scss">
-  @import 'Halls.scss';
+.dashboard {
+  min-height: 100vh;
+  background: linear-gradient(118deg, #87e0cb 7.92%, #c6e088 90.54%);
+  overflow-x: hidden;
+  font-family: "Brotesk", Helvetica, Arial, sans-serif;
 
-  .modal {
+  &__layout {
     display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    flex-wrap: wrap;
+    align-items: stretch;
     justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.7s ease;
-    z-index: 1000;
-  }
-  .modal.show {
-    opacity: 1;
-  }
-  .modalContent {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    width: 500px;
-    text-align: center;
-    transform: translateY(100%);
-    transition: transform 0.7s ease, opacity 0.7s ease-in-out;
-    opacity: 0;
-    font-family: inherit;
-    position: relative;
-  }
-  .modalContent h2, .modalContent p {
-    font-family: inherit;
-  }
-  .modal.show .modalContent {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  .modal.show + .halls.dashboardContainer > *:not(.nextTrainingCard) {
-    filter: brightness(0.5);
-  }
-  .nextTrainingCard {
-    filter: none !important;
-  }
-  .halls.dashboardContainer {
-    filter: none;
-  }
-  .halls.dashboardContainer > * {
-    z-index: 0;
+    gap: 20px;
+    max-width: 1600px;
+    margin: 110px auto;
+    padding: 0 40px;
+
+    @media (max-width: 991px) {
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    @media (max-width: 575px) {
+      padding: 0 15px;
+    }
   }
 
-  .modalContent {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    width: 500px;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  &__column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 380px;
+    flex-shrink: 0;
+
+    @media (max-width: 1200px) {
+      width: 340px;
+    }
+
+    @media (max-width: 1024px) {
+      width: 100%;
+      max-width: 500px;
+    }
   }
-  .modalContent input {
-    display: block;
-    margin: 10px auto;
-    padding: 8px;
-    width: 80%;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+
+  &__actions {
+    width: 140px;
+    background-color: rgba(255, 255, 255, 0.631);
+    border-radius: 29px;
+    flex-shrink: 0;
+    align-self: stretch;
+
+    @media (max-width: 1024px) {
+      width: 100%;
+      max-width: 500px;
+      align-self: auto;
+    }
   }
-  .modalContent button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
+
+  &__actions-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 40px 20px;
+    gap: 60px;
+    height: 100%;
+
+    @media (max-width: 1024px) {
+      flex-direction: row;
+      justify-content: space-evenly;
+      padding: 30px 20px;
+      gap: 20px;
+      height: auto;
+    }
+  }
+
+  &__action-icon {
+    width: 90px;
+    height: 90px;
+    border-radius: 10px;
     cursor: pointer;
+    transition: transform 0.3s ease;
+    object-fit: contain;
+
+    &:hover {
+      transform: translateY(-10px);
+    }
+
+    @media (max-width: 575px) {
+      width: 70px;
+      height: 70px;
+    }
   }
-  .modalContent button:hover {
-    background-color: #45a049;
-  }
-  .closeButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
-  }
+}
 </style>

@@ -5,8 +5,8 @@ import App from './App.vue';
 
 import 'aos/dist/aos.css';
 import 'normalize.css';
+import './fonts/fonts.css';
 import './common.css';
-import './fonts.css';
 
 const app = createApp(App);
 app.use(router);
