@@ -7,6 +7,7 @@ import 'aos/dist/aos.css';
 import 'normalize.css';
 import './fonts/fonts.css';
 import './common.css';
+import './theme.css';
 
 const app = createApp(App);
 app.use(router);

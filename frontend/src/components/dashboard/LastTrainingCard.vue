@@ -39,8 +39,9 @@ defineEmits(['click']);
     font-style: italic;
     font-size: 28px;
     line-height: 1.2;
-    color: #000;
+    color: var(--text-primary);
     margin: 0 0 25px 0;
+    transition: color 0.3s ease;
 
     @media (max-width: 768px) {
       font-size: 25px;
@@ -62,8 +63,9 @@ defineEmits(['click']);
       font-weight: 600;
       font-size: 22px;
       line-height: 1.4;
-      color: #000;
+      color: var(--text-primary);
       margin: 0;
+      transition: color 0.3s ease;
 
       @media (max-width: 768px) {
         font-size: 20px;

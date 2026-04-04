@@ -43,8 +43,9 @@ defineEmits(['click']);
     font-style: italic;
     font-size: 28px;
     line-height: 1.2;
-    color: #000;
+    color: var(--text-primary);
     margin: 0;
+    transition: color 0.3s ease;
 
     @media (max-width: 768px) {
       font-size: 25px;
@@ -75,8 +76,9 @@ defineEmits(['click']);
     font-weight: 600;
     font-size: 90px;
     line-height: 1;
-    color: #000;
+    color: var(--text-primary);
     text-align: center;
+    transition: color 0.3s ease;
 
     @media (max-width: 768px) {
       font-size: 72px;
@@ -92,8 +94,9 @@ defineEmits(['click']);
     font-weight: 600;
     font-size: 32px;
     line-height: 1.2;
-    color: #000;
+    color: var(--text-primary);
     text-align: center;
+    transition: color 0.3s ease;
 
     @media (max-width: 768px) {
       font-size: 28px;
@@ -118,9 +121,10 @@ defineEmits(['click']);
     font-weight: 600;
     font-size: 90px;
     line-height: 1;
-    color: #000;
+    color: var(--text-primary);
     text-align: center;
     margin: 0;
+    transition: color 0.3s ease;
 
     @media (max-width: 768px) {
       font-size: 72px;

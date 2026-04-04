@@ -1,0 +1,166 @@
+/* CSS Variables for Light and Dark themes */
+:root {
+  /* Light theme */
+  --bg-primary: linear-gradient(118deg, #87e0cb 7.92%, #c6e088 90.54%);
+  --bg-secondary: rgba(255, 255, 255, 0.95);
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --header-bg: rgba(255, 255, 255, 0.95);
+  --nav-bg: rgba(0, 0, 0, 0.03);
+  --nav-hover: rgba(0, 0, 0, 0.05);
+  
+  --text-primary: #000;
+  --text-secondary: #333;
+  --text-tertiary: #666;
+  
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --border-color: rgba(0, 0, 0, 0.1);
+  
+  --input-bg: #fff;
+  --input-border: rgba(0, 0, 0, 0.1);
+  
+  --modal-bg: rgba(255, 255, 255, 0.95);
+  --modal-overlay: rgba(0, 0, 0, 0.5);
+  
+  --btn-primary: #4CAF50;
+  --btn-primary-hover: #45a049;
+  --btn-secondary: #e0e0e0;
+  --btn-secondary-hover: #d0d0d0;
+  --btn-delete: #f44336;
+  --btn-delete-hover: #da190b;
+}
+
+[data-theme="dark"] {
+  /* Dark theme */
+  --bg-primary: linear-gradient(118deg, #1a4d44 7.92%, #3d5a2e 90.54%);
+  --bg-secondary: rgba(30, 30, 30, 0.95);
+  --bg-card: rgba(40, 40, 40, 0.95);
+  --header-bg: rgba(30, 30, 30, 0.95);
+  --nav-bg: rgba(255, 255, 255, 0.05);
+  --nav-hover: rgba(255, 255, 255, 0.08);
+  
+  --text-primary: #fff;
+  --text-secondary: #e0e0e0;
+  --text-tertiary: #b0b0b0;
+  
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --border-color: rgba(255, 255, 255, 0.1);
+  
+  --input-bg: rgba(50, 50, 50, 0.8);
+  --input-border: rgba(255, 255, 255, 0.2);
+  
+  --modal-bg: rgba(40, 40, 40, 0.98);
+  --modal-overlay: rgba(0, 0, 0, 0.7);
+  
+  --btn-primary: #5cb85f;
+  --btn-primary-hover: #4cae4f;
+  --btn-secondary: #555;
+  --btn-secondary-hover: #666;
+  --btn-delete: #d9534f;
+  --btn-delete-hover: #c9302c;
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Prevent transition on page load */
+.no-transition * {
+  transition: none !important;
+}
+
+/* Global styles for all pages */
+.trainings-page,
+.nutrition-page,
+.videos-page,
+.goals-page,
+.profile-page,
+.training-form-page {
+  background: var(--bg-primary);
+  min-height: calc(100vh - 80px);
+}
+
+/* Cards */
+.stat-card,
+.training-card,
+.meal-card,
+.video-card,
+.goal-card,
+.completed-item,
+.profile-card,
+.diet-card {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
+/* Text colors */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-primary);
+}
+
+/* Inputs */
+input,
+select,
+textarea {
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--btn-primary);
+  
+  &:hover {
+    background-color: var(--btn-primary-hover);
+  }
+}
+
+.btn-secondary {
+  background-color: var(--btn-secondary);
+  color: var(--text-primary);
+  
+  &:hover {
+    background-color: var(--btn-secondary-hover);
+  }
+}
+
+.btn-delete {
+  background-color: var(--btn-delete);
+  
+  &:hover {
+    background-color: var(--btn-delete-hover);
+  }
+}
+
+/* Modals */
+.modal {
+  background-color: var(--modal-overlay);
+}
+
+.modal__content,
+.modalContent {
+  background-color: var(--modal-bg);
+  color: var(--text-primary);
+}
+
+/* Empty states */
+.empty-state {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
+/* Labels and secondary text */
+.label,
+.stat-card h3,
+.training-card__date,
+.meal-card__time,
+.video-card__description,
+.goal-card__deadline {
+  color: var(--text-tertiary);
+}
+

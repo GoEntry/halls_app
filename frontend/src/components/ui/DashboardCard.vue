@@ -10,16 +10,16 @@ defineEmits(['click']);
 
 <style scoped lang="scss">
 .card {
-  background-color: rgba(255, 255, 255, 0.631);
+  background-color: var(--bg-card);
   border-radius: 29px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
   cursor: pointer;
   display: flex;
   flex-direction: column;
 
   &:hover {
     transform: translateY(-10px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 20px var(--shadow-color);
   }
 }
 </style>
